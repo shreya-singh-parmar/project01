@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Messaging App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        #container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        #options {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #messages {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .message {
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        #yesButton {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+        }
+
+        #noButton {
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <button id="showOptionsButton" onclick="showOptions()">Show Options</button>
+
+    <div id="options">
+        <button id="yesButton" onclick="showMessages('Yes')">Yes</button>
+        <button id="noButton" onclick="showNo()">No</button>
+    </div>
+
+    <div id="messages"></div>
+</div>
+
+<script>
+    function showOptions() {
+        document.getElementById('options').style.display = 'block';
+    }
+
+    function showNo() {
+        document.getElementById('options').style.display = 'none';
+        document.getElementById('messages').style.display = 'none';
+    }
+
+    function showMessages(option) {
+        document.getElementById('options').style.display = 'none';
+        document.getElementById('messages').style.display = 'block';
+
+        // Clear existing messages
+        clearMessages();
+
+        // Simulating incoming messages with specific timings
+        setTimeout(function () {
+            addMessage('Mobile Number 123456789', 'Hello!');
+        }, 500);
+
+        setTimeout(function () {
+            addMessage('Mobile Number 987654321', 'Hi there!');
+        }, 1500);
+
+        // You can customize the messages based on the selected option
+        if (option === 'Yes') {
+            setTimeout(function () {
+                addMessage('Mobile Number 123456789', 'How are you?');
+            }, 3000);
+        }
+    }
+
+    function addMessage(sender, text) {
+        const messagesDiv = document.getElementById('messages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message';
+        messageDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
+        messagesDiv.appendChild(messageDiv);
+    }
+
+    function clearMessages() {
+        const messagesDiv = document.getElementById('messages');
+        messagesDiv.innerHTML = ''; // Clear the content
+    }
+</script>
+
+</body>
+</html>
